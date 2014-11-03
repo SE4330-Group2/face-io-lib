@@ -18,6 +18,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="config.xml" />
+    <Xml Include="configLocalHost.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="config_parser.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -27,6 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="direct_call.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="face_common.h">

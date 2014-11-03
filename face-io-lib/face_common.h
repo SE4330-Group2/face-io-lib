@@ -3,7 +3,7 @@
 #ifndef FACE_COMMON_H
 #define FACE_COMMON_H        
 
-#include "globals.h"
+#include "globals.h"   // I added this
 
 
 typedef int64_t FACE_SYSTEM_TIME_TYPE; /* 64-bit signed int with 1 nanosecond LSB */

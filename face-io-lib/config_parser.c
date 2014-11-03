@@ -100,9 +100,33 @@ _Bool PasrseConfigFile( /* in */ const char * filename, /*out */ FACE_CONFIG_DAT
       {
          StoreByte(line + strlen("<discrete_inital_value>"), &config[*numConnections].discreteInitialValue);
       }
+      else if (strncmp("<destinationaddress>", line, strlen("<destinationaddress>")) == 0)
+      {
+         StoreString(line + strlen("<destinationaddress>"), config[*numConnections].destinationAddress);
+      }
+      else if (strncmp("<destinationport>", line, strlen("<destinationport>")) == 0)
+      {
+         StoreShort(line + strlen("<destinationport>"), &config[*numConnections].destinationPort);
+      }
+      else if (strncmp("<a429_parity>", line, strlen("<a429_parity>")) == 0)
+      {
+         index = strlen("<a429_parity>");
+         if (tolower(line[index]) == 'e')
+            config[*numConnections].a429Parity = FACE_A429_EVEN;
+         else
+            config[*numConnections].a429Parity = FACE_A429_ODD;
+      }
+      else if (strncmp("<a429_speed>", line, strlen("<a429_speed>")) == 0)
+      {
+         index = strlen("<a429_speed>");
+         if (tolower(line[index]) == 'l')
+            config[*numConnections].a429Speed = FACE_A429_LOW;
+         else
+            config[*numConnections].a429Speed = FACE_A429_HIGH;
+      }
 
 
-      // Etc.  Will need to add more when we do UDP and when we do A429
+      // Etc.  Haven't done sourceport, sourceaddress. Not sure of others will be needed
    
    }
 

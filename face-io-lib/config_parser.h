@@ -6,6 +6,8 @@
 #include "globals.h"
 #include "face_ios.h"
 
+#define WINDOWS_OS
+
 #ifdef WINDOWS_OS
    #include <winsock2.h>
 #endif
@@ -50,8 +52,8 @@ typedef struct
     uint64_t                  refreshPeriod;                         // How often it needs to be updated
     char                      sourceAddress[MAX_IP_LENGTH + 1];      // Address of PSS machine
     char                      destinationAddress[MAX_IP_LENGTH + 1]; // Address of I/O Service machine
-    int16_t                   sourcePort;                            // Port used on the PSS machine
-    int16_t                   destinationPort;                       // Port used on the I/O Service machine
+    uint16_t                  sourcePort;                            // Port used on the PSS machine
+    uint16_t                  destinationPort;                       // Port used on the I/O Service machine
     FACE_BUS_TYPE             busType;                               // Bus Type
     uint16_t                  channel;                               // Logical channel number, 1-based (will need mapping to hardware in I/O Seg)
     uint8_t                   discreteInitialValue;                  // Initial value for a Discrete output

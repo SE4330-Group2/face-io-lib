@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6A977CA5-5BB7-49F2-A054-C5409C4B53F5}</ProjectGuid>
+    <ProjectGuid>{75BC4EA6-D056-4D9B-A824-1BB1ED50ADFB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>faceiolib</RootNamespace>
+    <RootNamespace>faceiolib2</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,11 +76,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="config.xml" />
+    <Xml Include="configLocalHost.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="config_parser.c" />
     <ClCompile Include="face_io_api.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config_parser.h" />
+    <ClInclude Include="direct_call.h" />
     <ClInclude Include="face_common.h" />
     <ClInclude Include="face_ios.h" />
     <ClInclude Include="face_messages.h" />
