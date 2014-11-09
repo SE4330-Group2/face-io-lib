@@ -27,9 +27,18 @@ The header file associated with this C file is the FACE standard file ios.h
 #include "config_parser.h"
 #include "direct_call.h"
 
-#include <winsock2.h>
-#define s_addr S_un.S_addr         // Windows defines this differently than Posix
-#pragma comment(lib,"Ws2_32.lib")  // Get posix sockets in Windows - FACE doesn't allow pragma's
+#ifdef LINUX_OS
+   #include <sys/socket.h>
+   #include <sys/select.h>
+   #include <netinet/in.h>
+   #include <arpa/inet.h>     // Otherwise get warning that inet_addr is implicitly defined.
+#endif
+
+#ifdef WINDOWS_OS
+   #include <winsock2.h>
+   #define s_addr S_un.S_addr         // Windows defines this differently than Posix
+   #pragma comment(lib,"Ws2_32.lib")  // Get posix sockets in Windows - FACE doesn't allow pragma's
+#endif
 
 
 
@@ -108,7 +117,7 @@ void FACE_IO_Initialize
    isItIOSeg = configuration_file[0] != '0';   // Assume yes except for '0'
 
    numConnections = MAX_CONNECTIONS;
-   success = PasrseConfigFile(configuration_file + 1, configData, &numConnections);
+   success = ParseConfigFile(configuration_file + 1, configData, &numConnections);
 
    for (i = 0; i < numConnections; i++)
    {
@@ -427,8 +436,8 @@ static _Bool CreateSockets(void)
             connectionData[i].destAddr.sin_family = AF_INET;
             connectionData[i].destAddr.sin_port =  htons(configData[i].destinationPort);
 
-            if (isItIOSeg && configData[i].direction == FACE_TRANSMIT ||
-               !isItIOSeg && configData[i].direction == FACE_RECEIVE)
+            if ((isItIOSeg && configData[i].direction == FACE_TRANSMIT) ||
+               (!isItIOSeg && configData[i].direction == FACE_RECEIVE))
             {
                // The destination is on the "Read" side, so need to bind the address to the read socket 
                connectionData[i].destAddr.sin_addr.s_addr = 0;      // htonl(INADDR_ANY);

@@ -4,7 +4,6 @@
 // Comment out exactly one of these, uncomment the other
 #define WINDOWS_OS
 //#define LINUX_OS
-#define WINDOWS_OS
 
 #ifdef WINDOWS_OS
    #define _CRT_SECURE_NO_WARNINGS    // remove depreacated warnings such as on fopen
